@@ -13,3 +13,6 @@ num.valueOf();
 bool.valueOf();
 // '123'
 str.valueOf();
+
+
+var a = { b: 1 };
