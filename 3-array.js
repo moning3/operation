@@ -57,3 +57,10 @@ for (var i = 0; i < g.length; i += 1) {
   }
 }
 console.log(resultInt)
+
+// 调用函数 让数组，随机顺序
+var h = [1, 2, 3, 4];
+function random(a, b) {
+  return Math.random() > 0.5 ? -1 : 1
+}
+h.sort(random);
