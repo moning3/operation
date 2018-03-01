@@ -10,6 +10,14 @@
 
 <body>
   <Script>
+    // 案例
+    function a() {
+      console.log(arguments)
+    }
+    var b = [1, 2, 3, 4]
+    a(b, 0)
+    
+    // 递归 斐波那契数列
     var p = [];
 
     function factorial(n) {
@@ -25,27 +33,12 @@
     for (var i = 1; i < 2; i += 1) {
       p.push(factorial(i))
     }
-
-    // var obj = {
-    //   name: 'linxin'
-    // }
-
-    // function func(firstName, lastName) {
-    //   debugger
-    //   console.log(firstName + ' ' + this.name + ' ' + lastName);
-    // }
-
-    // func.apply(obj, ['A', 'B']);
-
-    var obj = {
-    name: 'linxin'
-}
-
-function func(firstName, lastName) {
-    console.log(firstName + ' ' + this.name + ' ' + lastName);
-}
-
-func.call(obj, 'C', 'D');   
+    // apply和call
+    var func = function (a, b, c) {
+      console.log([a, b, c]);
+    };
+    func.apply(null, [1, 2, 3]);
+    func.call(null, 1, 2, 3);
   </Script>
 </body>
 
