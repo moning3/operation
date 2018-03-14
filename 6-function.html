@@ -52,11 +52,10 @@
 
     test.myBind = function (a) {
       return function () {
-        console.log(-this.a.b)
+        test.call(a)
       }
-
     }
-    console.log(test.myBind())
+
     test() // 打印：undefined
     test.bind(a)() // 打印 1
     // 注意：这个myBind跟bind一样可以在任意function上使用，不是只能在test这个函数上。
@@ -88,7 +87,7 @@
       if (len === 3) {
         return '3'
       } else if (len === 2) {
-        if ( typeof arguments[1] === 'object') {
+        if (typeof arguments[1] === 'object') {
           return '0'
         } else {
           return '1'
@@ -98,6 +97,29 @@
       }
     }
     reNum(1, 2)
+
+
+
+
+
+    var module = {
+      x: 42,
+      getX: function () {
+        return this.x;
+      }
+    }
+
+    var retrieveX = module.getX;
+    console.log(retrieveX());
+    // 打印 undefined
+    retrieveX.myBind = function (module) {
+      return function(){
+        retrieveX.call(module)
+      }
+    }
+    var boundGetX = retrieveX.myBind(module);
+    console.log(boundGetX());
+    // 打印 42
   </Script>
 </body>
 
