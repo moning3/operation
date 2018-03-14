@@ -11,34 +11,92 @@
 <body>
   <Script>
     // 案例
-    function a() {
-      console.log(arguments)
-    }
-    var b = [1, 2, 3, 4]
-    a(b, 0)
-    
-    // 递归 斐波那契数列
-    var p = [];
+    // function a() {
+    //   console.log(arguments)
+    // }
+    // var b = [1, 2, 3, 4]
+    // a(b, 0)
 
-    function factorial(n) {
-      if (n == 0) {
-        return n = 0
-      } else if (n == 1) {
-        return n = 1
+    // // 递归 斐波那契数列
+    // var p = [];
+
+    // function factorial(n) {
+    //   if (n == 0) {
+    //     return n = 0
+    //   } else if (n == 1) {
+    //     return n = 1
+    //   } else {
+    //     return factorial(n - 1) + factorial(n - 2)
+    //   }
+    // }
+
+    // for (var i = 1; i < 2; i += 1) {
+    //   p.push(factorial(i))
+    // }
+    // // apply和call
+    // var func = function (a, b, c) {
+    //   console.log([a, b, c]);
+    // };
+    // func.apply(null, [1, 2, 3]);
+    // func.call(null, 1, 2, 3);
+
+
+    // 实现一个跟Function.prototype.bind相同功能的myBind函数：
+    var a = {
+      b: 1
+    }
+
+    function test() {
+      console.log(this.b)
+    }
+
+    test.myBind = function (a) {
+      return function () {
+        console.log(-this.a.b)
+      }
+
+    }
+    console.log(test.myBind())
+    test() // 打印：undefined
+    test.bind(a)() // 打印 1
+    // 注意：这个myBind跟bind一样可以在任意function上使用，不是只能在test这个函数上。
+    test.myBind(a)() // 打印 1
+
+
+    // 取出这个数组里所有的元素
+    var meta = [1, 2, [3, 4, [5]], 6, [7, [8, 9, [10, 11, [12]]]]];
+
+    function f(arr) {
+      return arr.reduce(function (flag, val) {
+        if (val instanceof Array) {
+          var array = f(val);
+          return flag.concat(array)
+        } else {
+          flag.push(val)
+          return flag
+        }
+      }, [])
+    }
+    // 期望输出：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+
+    // 实现一个函数，当参数有3个时返回字符串3。
+    // 当参数有2个时，且第二个参数是object类型时返回字符串0。其他所有情况返回字符串1。
+
+    function reNum() {
+      var len = arguments.length
+      if (len === 3) {
+        return '3'
+      } else if (len === 2) {
+        if ( typeof arguments[1] === 'object') {
+          return '0'
+        } else {
+          return '1'
+        }
       } else {
-        return factorial(n - 1) + factorial(n - 2)
+        return '1'
       }
     }
-
-    for (var i = 1; i < 2; i += 1) {
-      p.push(factorial(i))
-    }
-    // apply和call
-    var func = function (a, b, c) {
-      console.log([a, b, c]);
-    };
-    func.apply(null, [1, 2, 3]);
-    func.call(null, 1, 2, 3);
+    reNum(1, 2)
   </Script>
 </body>
 
