@@ -104,7 +104,7 @@
 
     var module = {
       x: 42,
-      getX: function () {
+      getX: function (a, b) {
         return this.x;
       }
     }
@@ -112,14 +112,47 @@
     var retrieveX = module.getX;
     console.log(retrieveX());
     // 打印 undefined
-    retrieveX.myBind = function (module) {
-      return function(){
+    Function.prototype.myBind = function () {
+      return function () {
         retrieveX.call(module)
       }
     }
     var boundGetX = retrieveX.myBind(module);
     console.log(boundGetX());
     // 打印 42
+
+
+
+
+
+
+
+
+    function Parent(name, age) {
+      this.name = name
+      this.age = age
+    }
+
+    Parent.prototype.hello = function () {
+      console.log(this.name, this.age)
+    }
+
+    // new 调用 叫做构造函数调用
+    // var parent1 = new Parent('HH', 18)
+
+    function Child(name, age, sex) {
+      Parent.call(this, name, age);
+      this.sex = sex
+    }
+
+    Child.prototype = Object.create(Parent.prototype)
+
+
+    var child1 = new Child('HH', '男', 18)
+    // var child2 = new Child('66', '女', 15)
+
+    child1.hello() // 打印HH 男 18
+    // child2.hello() // 打印66 女 15
   </Script>
 </body>
 
