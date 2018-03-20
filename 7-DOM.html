@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>7</title>
+</head>
+
+<body>
+  <input type="button" onclick="change(1)" value="获取ID,改变颜色">
+  <p id="sty1">获取Id，改变颜色</p>
+  <input type="button" onclick="change(2)" value="获取名字,改变颜色">
+  <p name="sty2">获取名字，改变颜色</p>
+
+  <div id="sty3">
+    <p>111</p>
+    <p>222</p>
+    <p>333</p>
+  </div>
+  <div id="sty4">
+    <span id='con1'>内容</span>
+    <span>1</span>
+    <span>2</span>
+  </div>
+  <!-- <input type="button" value="戳我一下" onclick="create()"> -->
+  <div id="div2">
+    <p>页面内容</p>
+  </div>
+  <script>
+    function change(num) {
+      var combined = 'sty' + num
+      if (num === 1) {
+        document.getElementById(combined).style.color = 'red';
+      } else if (num === 2) {
+        document.getElementsByName(combined)[0].style.color = 'yellow'
+      } else {
+        alert('暂未查询到')
+      }
+    }
+    var sty3 = document.getElementById('sty3');
+    var sty3Num = sty3.getElementsByTagName('p').length;
+    console.log('p标签的个数：' + sty3Num);
+    var sty4 = document.getElementById('sty4')
+    console.log(sty4.firstChild.nodeName);
+    console.log(sty4.lastChild.nodeName);
+    console.log(sty4.childNodes);
+    console.log(sty4.previousSibling);
+    console.log(sty4.nextSibling)
+    var con1 = document.getElementById('con1');
+    console.log(con1.parentNode)
+
+    window.onload = function () {
+      var newDiv = document.createElement('div');
+      var newCon = document.createTextNode('创建的div')
+      newDiv.appendChild(newCon)
+      var current = document.getElementById('div1');
+      document.body.insertBefore(newDiv,current)
+
+
+      var node = document.getElementById("div2");
+      var attr = document.createAttribute("my_attrib");
+      attr.nodeValue = "属性值";
+      node.setAttributeNode(attr);
+    }
+  </script>
+</body>
+
+</html>
